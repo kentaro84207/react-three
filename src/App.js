@@ -1,34 +1,23 @@
-import React, { useRef } from 'react';
-import { Canvas, useFrame } from 'react-three-fiber';
+/** @jsx jsx */
+import { css, jsx, Global } from '@emotion/core';
+import emotionReset from 'emotion-reset';
+import { Work } from './work';
 
-const Thing = () => {
-  const ref = useRef();
-  useFrame(() => (ref.current.rotation.z += 0.01));
+const globalStyles = css`
+    ${emotionReset}
+    *, *::after, *::before {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+    }
+`;
 
-  return (
-    <mesh
-      ref={ref}
-      onClick={e => console.log('click')}
-      onPointerOver={e => console.log('hover')}
-      onPointerOut={e => console.log('unhover')}
-    >
-      <planeBufferGeometry attach='geometry' args={[1, 1]} />
-      <meshBasicMaterial
-        attach='material'
-        color='hotpink'
-        opacity={0.5}
-        transparent
-      />
-    </mesh>
-  )
-}
-
-const App = () => {
-  return (
-    <Canvas>
-      <Thing />
-    </Canvas>
-  )
-}
+const App = () => (
+  <div>
+    <Global styles={globalStyles} />
+    <Work />
+  </div>
+);
 
 export default App;
